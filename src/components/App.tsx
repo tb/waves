@@ -1,9 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import SiriWave from 'siriwave';
+// @ts-ignore
+import SineWaves from 'sine-waves';
 
 function App() {
-    const siriRef: React.RefObject<HTMLDivElement> = React.createRef();
+    const sineRef: React.RefObject<HTMLDivElement> = useRef(null);
+    const [sineWaves, setSiriWaves] = useState<any>(null);
+
+    // useEffect(() => {
+    //     // based on https://codepen.io/isuttell/pen/MYaoKX
+    //     const sineWaves = new SineWaves({
+    //         el: sineRef.current as HTMLElement, // fix me:  this.el.getContext is not a function
+    //         speed: 5,
+    //         ease: 'SineInOut',
+    //         wavesWidth: '75%',
+    //         rotate: 0,
+    //         waves: [
+    //             { timeModifier: 4, lineWidth: 1, amplitude: -25, wavelength: 25 },
+    //             { timeModifier: 2, lineWidth: 1, amplitude: -10, wavelength: 30 },
+    //             { timeModifier: 1, lineWidth: 1, amplitude: -30, wavelength: 30 },
+    //             { timeModifier: 3, lineWidth: 1, amplitude: 40, wavelength: 40 },
+    //             { timeModifier: 0.5, lineWidth: 1, amplitude: -60, wavelength: 60 },
+    //             { timeModifier: 1.3, lineWidth: 1, amplitude: -40, wavelength: 40 }
+    //         ],
+    //     });
+    //     setSiriWaves(sineWaves);
+    // }, []);
+
+    const siriRef: React.RefObject<HTMLDivElement> = useRef(null);
     const [siriWave, setSiriWave] = useState<any>(null);
 
     const defaultSpeed =  0.03
@@ -89,7 +114,7 @@ function App() {
             //multipy frequency by resolution and divide it to scale for setting speed.
             frequency = ((1+frequency)*11.7185)/24000;
             //set the speed for siriwave
-            siriWave.setSpeed(frequency*2);
+            siriWave.setSpeed(frequency);
 
             //find the max amplituded
             // @ts-ignore
@@ -101,7 +126,7 @@ function App() {
             // console.log(frequency, amplitude);
 
             //scale amplituded from [-1, 1] to [0, 10].
-            amplitude = Math.abs(amplitude*10);
+            amplitude = Math.abs(amplitude*5);
 
             //if amplitude is greater than 0 then set siriwave amplitude else set to 0.0.
             if(amplitude >= 0){
@@ -124,6 +149,7 @@ function App() {
 
     return (
         <div className="App">
+            <div ref={sineRef}></div>
             <div ref={siriRef}></div>
 
             <button onClick={() => toggleRecording()}>

@@ -24,3 +24,4 @@ You will also see any lint errors in the console.
 ### https://github.com/isuttell/sine-waves - TODO
 
 ### custom canvas solution - TODO
+https://www.youtube.com/watch?v=VNmTubIDZOY
