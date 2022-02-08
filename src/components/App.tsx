@@ -37,13 +37,13 @@ function App() {
     useEffect(() => {
         const siriWave = new SiriWave({
             style: 'ios',
-            width: 600,
-            height: 100,
+            // width: 900,
+            height: 80,
             speed: defaultSpeed,
             amplitude: defaultAmplitude,
             frequency: 1.5,
             color: '#aa00ff',
-            // cover: false,
+            cover: false,
             autostart: false,
             pixelDepth: 0.05,
             // lerpSpeed: 0.01,
